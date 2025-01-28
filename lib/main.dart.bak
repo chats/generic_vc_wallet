@@ -1,0 +1,117 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import 'config/app_config.dart';
+import 'screens/home/home_screen.dart';
+import 'screens/profile/profile_screen.dart';
+import 'screens/scan/scan_screen.dart';
+import 'services/storage_service.dart';
+import 'services/websocket_service.dart';
+
+Future<void> initServices() async {
+  // Initialize StorageService first
+  final storageService = await StorageService().init();
+  Get.put(storageService);
+
+  // Initialize AppConfig with StorageService
+  final appConfig = AppConfig.instance;
+  await appConfig.init(Environment.dev, storageService);
+  Get.put(appConfig);
+
+  // Initialize WebSocket Service last
+  await Get.putAsync(() => WebSocketService().init());
+}
+void main() async {
+  LicenseRegistry.addLicense(() async* {
+    final license = await rootBundle.loadString('google_fonts/OFL.txt');
+    yield LicenseEntryWithLineBreaks(['google_fonts'], license);
+  });
+  
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  await initServices();
+
+//  await AppConfig.instance.init(Environment.dev);
+
+  runApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Generic VC Wallet',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        visualDensity: VisualDensity.adaptivePlatformDensity,
+        fontFamily: GoogleFonts.anuphan().fontFamily,
+      ),
+      initialRoute: '/',
+      getPages: AppPages.pages,
+      home: MainScreen(),
+      initialBinding: AppBinding(),
+    ),
+  );
+}
+
+class AppBinding extends Bindings {
+  @override
+  void dependencies() {
+    Get.put(NavigationController());
+    //Get.put(QRScannerController());
+  }
+}
+
+class MainScreen extends GetView<NavigationController> {
+  //final NavigationController controller = Get.put(NavigationController());
+  
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Obx(() => IndexedStack(
+        index: controller.currentIndex.value,
+        children: [
+          HomePage(),
+          ScanPage(),
+          ProfilePage(),
+        ],
+      )),
+      bottomNavigationBar: Obx(() => BottomNavigationBar(
+        currentIndex: controller.currentIndex.value,
+        onTap: controller.changePage,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'หน้าหลัก',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.qr_code_scanner),
+            label: 'สแกน',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'โปรไฟล์',
+          ),
+        ],
+      )),
+    );
+  }
+}
+
+class NavigationController extends GetxController {
+  final currentIndex = 0.obs;
+  
+  void changePage(int index) {
+    currentIndex.value = index;
+  }
+}
+
+// App Pages
+class AppPages {
+  static final pages = [
+    GetPage(name: '/', page: () => HomePage()),
+    GetPage(name: '/scan', page: () => ScanPage()),
+    GetPage(name: '/profile', page: () => ProfilePage()),
+  ];
+}
+
+
