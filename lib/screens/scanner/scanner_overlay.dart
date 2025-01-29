@@ -30,7 +30,7 @@ class ScannerOverlay extends CustomPainter {
         Path()
           ..addRRect(RRect.fromRectAndRadius(
             scanArea,
-            const Radius.circular(0),
+            const Radius.circular(12),
           )),
       ),
       backgroundPaint,
@@ -40,7 +40,7 @@ class ScannerOverlay extends CustomPainter {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         scanArea,
-        const Radius.circular(0),
+        const Radius.circular(12),
       ),
       borderPaint,
     );

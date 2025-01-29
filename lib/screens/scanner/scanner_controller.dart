@@ -36,7 +36,6 @@ class ScannerController extends GetxController {
       if (barcode.rawValue != null && isScanning.value) {
         scannedValue.value = barcode.rawValue!;
         isScanning.value = false;
-        //mobileScannerController?.stop();
         mobileScannerController?.pause();
       }
     }

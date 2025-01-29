@@ -5,12 +5,14 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import 'scanner_controller.dart';
 import 'scanner_overlay.dart';
 
+
 class ScannerBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut(() => ScannerController());
   }
 }
+
 
 class ScannerScreen extends GetView<ScannerController> {
   const ScannerScreen({Key? key}) : super(key: key);
@@ -44,18 +46,16 @@ class ScannerScreen extends GetView<ScannerController> {
             child: const SizedBox.expand(),
           )),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.18,
+            top: MediaQuery.of(context).size.height * 0.185,
             left: 20,
             right: 20,
-            child: Text(!controller.isScanning.value
-                ? ''
-                : 
+            child: !controller.isScanning.value ? Container() : Text(
               'จัดวัตถุให้อยู่ภายในกรอบเพื่อสแกน',
               textAlign: TextAlign.center,
-              style: const TextStyle(
+              style: TextStyle(
                 color: Colors.white,
                 fontSize: 16,
-                fontWeight: FontWeight.bold,
+                //fontWeight: FontWeight.bold,
               ),
             ),
           ),
@@ -68,28 +68,41 @@ class ScannerScreen extends GetView<ScannerController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      ElevatedButton(
+                      OutlinedButton(
                         onPressed: controller.resumeScanner,
-                        style: ElevatedButton.styleFrom(
-                          //backgroundColor: Colors.grey,
-                          backgroundColor: Colors.transparent,
+                        style: OutlinedButton.styleFrom(
+                          side: const BorderSide(color: Color.fromRGBO(255, 255, 255, 0.8), width: 2),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 30,
                             vertical: 15,
                           ),
+                          backgroundColor: Colors.transparent,
                         ),
-                        child: const Text('Re-Scan'),
+                        child: const Text(
+                          'Re-Scan',
+                          style: TextStyle(
+                            color: Color.fromRGBO(255, 255, 255, 0.8),
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                       ElevatedButton(
                         onPressed: controller.continueToResult,
                         style: ElevatedButton.styleFrom(
-                          //backgroundColor: Colors.blue,
+                          backgroundColor: Color.fromRGBO(255, 255, 255, 0.8),
                           padding: const EdgeInsets.symmetric(
                             horizontal: 30,
                             vertical: 15,
                           ),
+                          //side: BorderSide(color: Color.fromRGBO(255, 255, 255, 0.8), width: 2),
                         ),
-                        child: const Text('Continue'),
+                        child: const Text(
+                          'Continue',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                          ),
+                        ),
                       ),
                     ],
                   ),
