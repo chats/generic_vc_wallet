@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../controllers/settings_controller.dart';
 import 'profile_section.dart';
 import 'security_section.dart';
 import 'preference_section.dart';
 
+//Controller
+import '../../controllers/settings_controller.dart';
 
+//Bindings
 class SettingsBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put(SettingsController());
+    Get.lazyPut(() => SettingsController());
   }
 }
 

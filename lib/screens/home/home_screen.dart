@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//Controller
 class HomeController extends GetxController {
-
+  void test() {
+    print('Test Home Controller');
+  }
 }
 
+//Bindings
 class HomeBinding extends Bindings {
   @override
   void dependencies() {
@@ -12,9 +16,10 @@ class HomeBinding extends Bindings {
   }
 }
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
+    controller.test();
     return Scaffold(
       appBar: AppBar(
         title: Text('หน้าหลัก'),

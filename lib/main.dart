@@ -1,7 +1,10 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'constants/constants.dart';
 import 'controllers/settings_controller.dart';
+import 'screens/scanner/scanner_controller.dart';
+import 'screens/scanner/scanner_screen.dart';
 import 'screens/settings/settings_screen.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -11,7 +14,6 @@ import 'services/storage_service.dart';
 import 'services/websocket_service.dart';
 import 'config/app_config.dart';
 import 'screens/home/home_screen.dart';
-import 'screens/scan/scan_screen.dart';
 
 
 // Initialize all services
@@ -45,7 +47,7 @@ void main() async {
       debugShowCheckedModeBanner: false,
       title: 'Generic VC Wallet',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: APP_PRIMARY_COLOR,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: GoogleFonts.anuphan().fontFamily,
       ),
@@ -61,8 +63,10 @@ class AppBinding extends Bindings {
   @override
   void dependencies() {
     Get.put(AuthService());
-    Get.put(NavigationController());
-    Get.put(SettingsController());
+    Get.lazyPut(() => NavigationController());
+    Get.lazyPut(() => HomeController());
+    Get.lazyPut(() => ScannerController());
+    Get.lazyPut(() => SettingsController());
   }
 }
 
@@ -85,7 +89,7 @@ class MainScreen extends GetView<NavigationController> {
         index: controller.currentIndex.value,
         children: [
           HomeScreen(),
-          ScanScreen(),
+          ScannerScreen(),
           SettingsScreen(),
         ],
       )),
