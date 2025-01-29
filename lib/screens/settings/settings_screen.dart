@@ -62,6 +62,12 @@ class SettingsScreen extends GetView<SettingsController> {
                       onTap: () => Get.toNamed('/settings/terms'),
                     ),
                     ListTile(
+                      leading: Icon(Icons.description_outlined),
+                      title: Text('License Agreement'),
+                      trailing: Icon(Icons.chevron_right),
+                      onTap: () => Get.toNamed('/settings/license'),
+                    ),
+                    ListTile(
                       leading: Icon(Icons.restore, color: Colors.red),
                       title: Text('Reset All Data'),
                       trailing: Icon(Icons.chevron_right),

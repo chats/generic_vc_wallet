@@ -1,3 +1,5 @@
+// screens/settings/profile_edit_screen.dart
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controllers/settings_controller.dart';
@@ -8,7 +10,6 @@ class ProfileEditScreen extends GetView<SettingsController> {
   final _nameController = TextEditingController();
   final _walletNameController = TextEditingController();
   final _walletKeyController = TextEditingController();
-  final _imageUrlController = TextEditingController();
   final _authService = Get.find<AuthService>();
 
   ProfileEditScreen() {
@@ -33,7 +34,6 @@ class ProfileEditScreen extends GetView<SettingsController> {
       _nameController.text = controller.fullName.value;
       _walletNameController.text = controller.walletName.value;
       _walletKeyController.text = controller.walletKey.value;
-      _imageUrlController.text = controller.profileImageUrl.value;
     });
   }
 
@@ -58,19 +58,10 @@ class ProfileEditScreen extends GetView<SettingsController> {
                       radius: 50,
                       backgroundImage: controller.profileImageUrl.value.isNotEmpty
                           ? NetworkImage(controller.profileImageUrl.value)
-                          : null,
-                      child: controller.profileImageUrl.value.isEmpty
-                          ? Icon(Icons.person, size: 50)
-                          : null,
+                          : AssetImage(
+                              _getDefaultAvatarPath(controller.fullName.value)
+                            ) as ImageProvider,
                     )),
-                    CircleAvatar(
-                      radius: 18,
-                      backgroundColor: Theme.of(context).primaryColor,
-                      child: IconButton(
-                        icon: Icon(Icons.edit, size: 18, color: Colors.white),
-                        onPressed: () => _showImageUrlDialog(context),
-                      ),
-                    ),
                   ],
                 ),
                 
@@ -159,34 +150,13 @@ class ProfileEditScreen extends GetView<SettingsController> {
     );
   }
 
-  void _showImageUrlDialog(BuildContext context) {
-    _imageUrlController.text = controller.profileImageUrl.value;
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text('เพิ่มรูปโปรไฟล์'),
-        content: TextField(
-          controller: _imageUrlController,
-          decoration: InputDecoration(
-            labelText: 'URL รูปภาพ',
-            border: OutlineInputBorder(),
-          ),
-        ),
-        actions: [
-          TextButton(
-            child: Text('ยกเลิก'),
-            onPressed: () => Navigator.pop(context),
-          ),
-          TextButton(
-            child: Text('ตกลง'),
-            onPressed: () {
-              Navigator.pop(context);
-              controller.profileImageUrl.value = _imageUrlController.text;
-            },
-          ),
-        ],
-      ),
-    );
+  String _getDefaultAvatarPath(String? name) {
+    //final isMan = name?.toLowerCase().contains('man') ?? false || 
+    //              name!.toLowerCase().contains('boy');
+    //return isMan 
+    //    ? 'assets/images/avatar-man-500.png' 
+    //    : 'assets/images/avatar-woman-500.png';
+    return 'assets/images/avatar-man-500.png';
   }
 
   void _saveProfile() {
@@ -195,9 +165,7 @@ class ProfileEditScreen extends GetView<SettingsController> {
         name: _nameController.text,
         walletName: _walletNameController.text,
         walletKey: _walletKeyController.text,
-        imageUrl: _imageUrlController.text.isNotEmpty 
-            ? _imageUrlController.text 
-            : null,
+        imageUrl: null, // ไม่ใช้ URL รูปภาพแล้ว
       );
       Get.back();
       Get.snackbar(

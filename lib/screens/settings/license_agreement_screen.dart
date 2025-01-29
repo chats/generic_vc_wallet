@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class TermsScreen extends StatelessWidget {
+class LicenseScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,18 +19,18 @@ class TermsScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             Text(
-              'เงื่อนไขการให้บริการ และนโยบายความเป็นส่วนตัว',
+              'ข้อตกลงสิทธิการใช้งาน (License Agreement)',
               style: Theme.of(context).textTheme.titleLarge,
             ),
             SizedBox(height: 24),
             
             _buildSection(
-              title: 'บทนำ',
-              content: 'บริษัท ABC จำกัด ("บริษัท", "ผู้่ให้บริการ") ให้บริการแอปพลิเคชัน Generic VC Wallet ("แอปพลิเคชัน") แก่ผู้ใช้งาน ("ผู้ใช้งาน")'+
-              'ภายใต้เงื่อนไขการให้บริการและนโยบายความเป็นส่วนตัวฉบับนี้ ซึ่งสอดคล้องกับกฎหมายไทย รวมถึง พระราชบัญญัติคุ้มครองข้อมูลส่วนบุคคล พ.ศ. 2562 (PDPA) '+
-              'และมาตรฐานสากล เช่น General Data Protection Regulation (GDPR) ของสหภาพยุโรป และ California Consumer Privacy Act (CCPA) '+
-              'ของสหรัฐอเมริกา การดาวน์โหลด ติดตั้ง หรือใช้งานแอปพลิเคชันนี้ หมายความว่าคุณยอมรับข้อกำหนดและเงื่อนไขทั้งหมดของเรา หากคุณไม่เห็นด้วยกับข้อกำหนดใด ๆ '+
-              'กรุณาหยุดใช้บริการทันที',
+              title: 'การให้สิทธิ์การใช้งาน',
+              content: 'บริษัท ABC จำกัด ("บริษัท", "ผู้ให้บริการ") ให้สิทธิ์การใช้งานที่ไม่เป็นเอกสิทธิ์ (non-exclusive), ไม่สามารถโอนสิทธิ์ (non-transferable), และเพิกถอนได้ (revocable) '+
+              'แก่ผู้ใช้สำหรับการติดตั้งและใช้งานแอปพลิเคชันบนอุปกรณ์ที่ได้รับอนุญาต ภายใต้เงื่อนไขต่อไปนี้'+
+              '\n\t- แอปพลิเคชันใช้เพื่อ วัตถุประสงค์ส่วนตัว หรือธุรกิจภายในองค์กรเท่านั้น'+
+              '\n\t- ห้ามใช้แอปพลิเคชันเพื่อ วัตถุประสงค์เชิงพาณิชย์ที่ไม่ได้รับอนุญาตจากบริษัท'+
+              '\n\t- ห้ามแก้ไข ทำซ้ำ แจกจ่าย หรือขายแอปพลิเคชันนี้โดยไม่ได้รับอนุญาตเป็นลายลักษณ์อักษรจากบริษัท',
             ),
  
             _buildSection(

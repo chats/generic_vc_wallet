@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'screens/home/home_screen.dart';
 import 'screens/scan/scan_screen.dart';
 import 'screens/profile/profile_screen.dart';
+import 'screens/settings/license_agreement_screen.dart';
 import 'screens/settings/settings_screen.dart';
 import 'screens/settings/profile_edit_screen.dart';
 import 'screens/settings/pin_setup_screen.dart';
@@ -16,6 +17,8 @@ class AppRoutes {
   static const String profileEdit = '/settings/profile';
   static const String pinSetup = '/settings/pin-setup';
   static const String terms = '/settings/terms';
+  static const String license = '/settings/license';
+  
   
   // Get pages
   static final routes = [
@@ -52,6 +55,11 @@ class AppRoutes {
     GetPage(
       name: terms,
       page: () => TermsScreen(),
+//      binding: AppBinding(),
+    ),
+    GetPage(
+      name: license,
+      page: () => LicenseScreen(),
 //      binding: AppBinding(),
     ),
   ];
