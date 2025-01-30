@@ -10,7 +10,7 @@ import 'screens/settings/terms_screen.dart';
 class AppRoutes {
   // Route names
   static const String home = '/';
-  static const String scan = '/scan';
+  static const String scanner = '/scanner';
   static const String settings = '/settings';
   static const String profileEdit = '/settings/profile';
   static const String pinSetup = '/settings/pin-setup';
@@ -26,7 +26,7 @@ class AppRoutes {
       binding: HomeBinding(),
     ),
     GetPage(
-      name: scan,
+      name: scanner,
       page: () => ScannerScreen(),
       binding: ScannerBinding(),
     ),
@@ -38,22 +38,22 @@ class AppRoutes {
     GetPage(
       name: profileEdit,
       page: () => ProfileEditScreen(),
-//      binding: AppBinding(),
+//      binding: ProfileEditBinding(),
     ),
     GetPage(
       name: pinSetup,
       page: () => PinSetupScreen(),
-//      binding: AppBinding(),
+//      binding: PinSetupBinding(),
     ),
     GetPage(
       name: terms,
       page: () => TermsScreen(),
-//      binding: AppBinding(),
+//      binding: TermsBinding(),
     ),
     GetPage(
       name: license,
       page: () => LicenseScreen(),
-//      binding: AppBinding(),
+//      binding: LicenseBinding(),
     )
   ];
 }

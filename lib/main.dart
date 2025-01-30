@@ -51,10 +51,10 @@ void main() async {
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: GoogleFonts.anuphan().fontFamily,
       ),
-      initialRoute: '/',
+      initialRoute: AppRoutes.home,
+      initialBinding: AppBinding(),
       getPages: AppRoutes.routes,
       home: MainScreen(),
-      initialBinding: AppBinding(),
     ),
   );
 }
@@ -80,8 +80,6 @@ class NavigationController extends GetxController {
 }
 
 class MainScreen extends GetView<NavigationController> {
-  //final NavigationController controller = Get.put(NavigationController());
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

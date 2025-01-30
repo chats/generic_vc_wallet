@@ -30,7 +30,7 @@ class ScannerOverlay extends CustomPainter {
         Path()
           ..addRRect(RRect.fromRectAndRadius(
             scanArea,
-            const Radius.circular(12),
+            const Radius.circular(0),
           )),
       ),
       backgroundPaint,
@@ -40,11 +40,12 @@ class ScannerOverlay extends CustomPainter {
     canvas.drawRRect(
       RRect.fromRectAndRadius(
         scanArea,
-        const Radius.circular(12),
+        const Radius.circular(0),
       ),
       borderPaint,
     );
 
+    /*
     // Draw corner markers
     final markerLength = size.width * 0.05;
     final cornerPaint = Paint()
@@ -52,7 +53,6 @@ class ScannerOverlay extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 4.0;
 
-    // Draw corners (same as before)
     // Top left corner
     canvas.drawLine(
       Offset(scanArea.left, scanArea.top + markerLength),
@@ -100,6 +100,7 @@ class ScannerOverlay extends CustomPainter {
       Offset(scanArea.right, scanArea.bottom),
       cornerPaint,
     );
+    */
   }
 
   @override
